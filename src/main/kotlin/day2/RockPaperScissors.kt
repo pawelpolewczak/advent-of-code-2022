@@ -1,5 +1,7 @@
 package day2
 
+import utils.Utils
+
 class RockPaperScissors {
 
     enum class GameChoice(val score: Int, val firstColumnMarker: Char, val secondColumnMarker: Char) {
@@ -70,7 +72,7 @@ class RockPaperScissors {
 }
 
 fun main() {
-    val linesOfPredictions = object {}.javaClass.getResourceAsStream("/day2/input.txt")?.bufferedReader()?.readLines()!!
+    val linesOfPredictions = Utils.readFileAsListOfLines("/day2/input.txt")
     val result = linesOfPredictions
         .map { line -> line.split(' ') }
 
@@ -90,8 +92,10 @@ fun main() {
         .map { lineAsList ->
             Pair(
                 RockPaperScissors.GameChoice.fromFirstColumn(lineAsList[0]),
-                RockPaperScissors.ResultType.getGameChoiceBasedOnExpectedResult(RockPaperScissors.GameChoice.fromFirstColumn(lineAsList[0]),
-                    RockPaperScissors.ResultType.fromMarker(lineAsList[1]))
+                RockPaperScissors.ResultType.getGameChoiceBasedOnExpectedResult(
+                    RockPaperScissors.GameChoice.fromFirstColumn(lineAsList[0]),
+                    RockPaperScissors.ResultType.fromMarker(lineAsList[1])
+                )
             )
         }
         .map { pair -> RockPaperScissors.GameChoice.resultForSecond(pair) }
