@@ -61,5 +61,4 @@ fun main() {
         .sumOf { it }
 
     println("Sum of priorities for badges is: $sumOfPrioritiesForBadges")
-
 }
